@@ -1,0 +1,38 @@
+package com.taikang.opt.controller;
+
+import com.taikang.nos.model.vo.ResponseData;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+  /**
+ * @author itw_chenhn
+ * 适用于visitBase 手动全部跑批
+ */
+@RestController
+@RequestMapping(value ="VisitBase" )
+public class VisitBaseByHandController {
+    @Autowired
+    private JobLauncher jobLauncher;
+    @Autowired
+    @Qualifier("visitBaseJob")
+    private Job job;
+
+    @GetMapping
+    public ResponseData hand(){
+        JobParameters parameters = new JobParametersBuilder().addString("jobID", String.valueOf(System.currentTimeMillis())).toJobParameters();
+        try {
+            jobLauncher.run(job,parameters);
+            return ResponseData.ok().data("VisitBase跑批成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseData.error().data("VisitBase跑批失败，原因"+e.getMessage());
+        }
+    }
+}

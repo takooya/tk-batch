@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>batch</title>
+    <style>
+        body{
+            background-color: #eee;
+        }
+        .control-container{
+            width: 60%;
+            min-width: 600px;
+            margin: 30px auto 0;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 0 28px #999;
+            transition: box-shadow .3s;
+        }
+        .control-container:hover{
+            box-shadow: 0 0 20px #999;
+        }
+        .control-title{
+            color: tomato;
+            padding: 20px 0 0;
+        }
+        .control-btn-wrap{
+            padding-bottom: 20px;
+        }
+        .btn{
+            padding: 5px 10px;
+            color: #999;
+            border-radius: 10px;
+            border: 2px solid; 
+            transition: color .3s, border-color .3s;  
+            outline: none;
+        }
+        .btn:hover{
+           color: #000;
+        }
+    </style>
+</head>
+<body>
+     <section class="control-container">
+        <h3 class="control-title">Run Batch</h3>
+        <section class="control-btn-wrap">
+            <button class="btn comp-list">企业基础表</button>
+            <button class="btn comp-activity">企业拜访基础表(全量统计)</button>
+            <button class="btn comp-visit-handle">企业拜访基础表(增量统计/天)</button>
+            <button class="btn comp-visit-count">排行榜</button>
+            <button class="btn comp-visit-history">拜访记录导出</button>
+            <button class="btn comp-visit-export">定期删除文件</button>
+        </section>
+     </section>  
+     <script src="./axios.js"></script>
+     <script>
+         window.onload = ()=>{
+             axios.get('http://10.136.87.151:7400/DriverSort')
+         }
+     </script> 
+</body>
+</html>

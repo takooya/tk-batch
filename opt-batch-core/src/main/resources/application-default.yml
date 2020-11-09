@@ -1,0 +1,42 @@
+spring:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/XXXXXXXXX?useSSL=false&&characterEncoding=utf8
+        username: root
+        password: root
+        hikari:
+           minimum-idle: 5
+           idle-timeout: 30000
+           maximum-pool-size: 100
+           auto-commit: true
+           pool-name: MyHikariCP
+           max-lifetime: 1800000
+           connection-timeout: 30000
+           connection-test-query: SELECT 1
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    redis:
+#        database: 2
+#        password: redis_6379
+#        sentinel.master: TKEFLX-RDS
+#        timeout: 50000ms
+#        sentinel:
+#          nodes: 10.137.122.161:26379,10.137.122.162:26379,10.137.122.163:26379
+#        lettuce:
+#          pool:
+#            max-idle: 50
+#            min-idle: 0
+#            max-wait: -1ms
+#            max-active: 100
+    batch:
+      job:
+        enabled: false
+    quartz:
+      job-store-type: jdbc
+server:
+  port: 7400
